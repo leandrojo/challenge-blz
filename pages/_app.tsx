@@ -1,14 +1,17 @@
 import React from 'react';
 import App, { AppProps } from 'next/app';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
+import { getPersistor } from '@rematch/persist';
+import { PersistGate } from 'redux-persist/integration/react';
 
+import store from '../store';
 import theme from '../theme';
 
 const CustomGlobalStyle = createGlobalStyle`
   html,
   body {
     background-color: ${props => props.theme.backgroundColor};
-    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+    font-family: ${props => props.theme.fontFamily};
     margin: 0;
     padding: 0;
   }
@@ -22,17 +25,25 @@ const CustomGlobalStyle = createGlobalStyle`
   }
 `;
 
+const persistor = getPersistor();
+
 interface AppMiddlewareProps extends AppProps {}
 
-export default class extends App<AppMiddlewareProps> {
+class AppCustom extends App<AppMiddlewareProps> {
   render() {
     const { Component, pageProps } = this.props;
+
+    console.log(this.props);
 
     return (
       <ThemeProvider theme={theme}>
         <CustomGlobalStyle />
-        <Component {...pageProps} />
+        <PersistGate persistor={persistor} loading={null}>
+          <Component {...pageProps} />
+        </PersistGate>
       </ThemeProvider>
     )
   }
 }
+
+export default store.withRedux(AppCustom);

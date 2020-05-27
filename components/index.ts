@@ -2,6 +2,7 @@ export { default as Button } from './Button';
 export { default as Card } from './Card';
 export { default as CreditCardData } from './CreditCardData';
 export { default as CreditCardForm, CreditCardFormController, CreditCardFormContext } from './CreditCardForm';
+export { default as Feedback } from './Feedback';
 export { default as Heading } from './Heading';
 export { default as Layout } from './Layout';
 export { default as ProductList, ProductListItem } from './ProductList';

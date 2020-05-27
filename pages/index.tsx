@@ -1,3 +1,15 @@
-import Cart from './cart';
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-export default Cart;
+
+const Home = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push('/cart');
+  }, []);
+
+  return null;
+}
+
+export default Home;

@@ -4,7 +4,6 @@ import Head from 'next/head';
 import {
   Card,
   CreditCardData,
-  CreditCardForm,
   Heading,
   Layout,
   Total,
@@ -35,8 +34,8 @@ const Success: NextPage = () => {
           Compra Efetuada com Sucesso
         </Feedback>
         <Heading>Pagamento</Heading>
-        <Card>
-          <CreditCardData data={creditCard.data} />
+        <Card css={{ marginBottom: '8px', width: '100%' }}>
+          <CreditCardData {...creditCard.data} />
         </Card>
         <Heading>Produtos</Heading>
         <Card>

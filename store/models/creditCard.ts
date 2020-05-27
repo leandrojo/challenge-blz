@@ -24,12 +24,11 @@ const creditCard = {
     },
   },
   effects: (dispatch: Dispatch) => ({
-    async save(payload: Partial<CreditCard>) {
+    async save({ expiringDate, number, name }: Partial<CreditCard>) {
       dispatch.creditCard.setIsLoading(true);
 
-      console.log(payload);
+      // Fake prepare and save data of a credit card.
 
-      // Fake save a credit card.
       const response = await (async () => {
         await delay(300);
         return {
@@ -37,7 +36,14 @@ const creditCard = {
         };
       })();
 
-      dispatch.creditCard.setData(Object.assign({}, payload, response));
+      dispatch.creditCard.setData(Object.assign(
+        {
+          expiringDate,
+          name: name?.toUpperCase(),
+          number: number?.split('.')[3],
+        },
+        response,
+      ));
       dispatch.creditCard.setIsLoading(false);
     }
   }),

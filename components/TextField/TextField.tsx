@@ -3,6 +3,7 @@ import MaskedInput, { MaskedInputProps } from 'react-text-mask';
 
 const StyledTextField = styled.label`
   display: flex;
+  flex: 1;
   flex-direction: column;
 `;
 

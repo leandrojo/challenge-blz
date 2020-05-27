@@ -13,8 +13,10 @@ import {
 } from '../components';
 import { useCart } from '../enhancers';
 
-const Cart: NextPage = () => {
+const Cart: NextPage = (props) => {
   const { data } = useCart();
+
+  console.log(props);
 
   function renderProducts() {
     return data?.items?.map(({ product }) => (

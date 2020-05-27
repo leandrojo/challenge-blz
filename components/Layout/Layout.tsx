@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Steps, { StyledSteps, StyledStep } from '../Steps';
 
 const Container = styled.div`
-  padding: 0 10px 0;
+  padding: 0 10px 20px;
 `;
 
 const StyledLayout = styled.div`

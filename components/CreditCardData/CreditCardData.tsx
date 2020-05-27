@@ -1,46 +1,24 @@
 import styled, { css, CSSObject } from 'styled-components';
 
+import CreditCard from '../../types/CreditCard';
+
+import Box, { Flex } from '../Box';
 import Text from '../Text';
+
+const Data = styled(Text)`
+  color: ${({ theme }) => theme.colors.grayExtraDark};
+`;
 
 const StyledCreditCardData = styled.div``;
 
-interface GridProps {
-  container?: boolean;
-  css?: CSSObject;
-  sm?: number;
-  item?: boolean;
-}
-
-const Grid = styled.div<GridProps>`
-  ${({ container }) => (container && css`
-    display: flex;
-  `)}
-
-  ${({ item }) => (item && css``)}
-
-  flex: ${({ sm }) => sm};
-  
-  ${({ css }) => css};
-`;
-
-interface CreditCardDataProps {
-  data: {
-    creditCardNumber: string;
-    expiringDate: string;
-    name: string;
-  } | null;
-}
-
-const CreditCardData: React.FC<CreditCardDataProps> = ({ data }) => {
-  if (data === null) return null;
-
-  const { creditCardNumber, expiringDate, name } = data;
-
+const CreditCardData: React.FC<Partial<CreditCard>> = ({ expiringDate, name, number }) => {
   return (
     <StyledCreditCardData>
-      <Text>{creditCardNumber}</Text>
-      <Text>{name}</Text>
-      <Text>{expiringDate}</Text>
+      <Flex css={{ flexDirection: 'column' }}>
+        <Box><Data>{`****.****.****.${number}`}</Data></Box>
+        <Box><Data>{name}</Data></Box>
+        <Box><Data>{expiringDate}</Data></Box>
+      </Flex>
     </StyledCreditCardData>
   );
 };

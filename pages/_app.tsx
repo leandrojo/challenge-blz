@@ -33,8 +33,6 @@ class AppCustom extends App<AppMiddlewareProps> {
   render() {
     const { Component, pageProps } = this.props;
 
-    console.log(this.props);
-
     return (
       <ThemeProvider theme={theme}>
         <CustomGlobalStyle />

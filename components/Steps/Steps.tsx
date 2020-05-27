@@ -1,4 +1,5 @@
 import Link, { LinkProps } from 'next/link'
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
 export const StyledSteps = styled.nav`
@@ -43,16 +44,13 @@ export const StyledStep = styled.li<StyledStepProps>`
   }
 `;
 
-interface StepProps extends LinkProps {
-  active?: boolean;
-}
+interface StepProps extends LinkProps {}
 
-const Step: React.FC<StepProps> = ({ active, children, ...props }) => {
+const Step: React.FC<StepProps> = ({ children, href }) => {
+  const router = useRouter();
   return (
-    <StyledStep active={active}>
-      <Link {...props}>
-        <a>{children}</a>
-      </Link>
+    <StyledStep active={router.pathname === href}>
+      <a>{children}</a>
     </StyledStep>
   );
 };
@@ -65,7 +63,7 @@ const Steps: React.FC<StepsProps> = ({ currentStep }) => {
   return (
     <StyledSteps>
       <ol>
-        <Step active href="/">Sacola</Step>
+        <Step href="/cart">Sacola</Step>
         <Step href="/payment">Pagamento</Step>
         <Step href="/success">Confirmação</Step>
       </ol>

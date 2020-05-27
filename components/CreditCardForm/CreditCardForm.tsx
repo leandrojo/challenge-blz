@@ -2,35 +2,13 @@ import React, { useContext } from 'react';
 import { Controller } from 'react-hook-form';
 import styled, { css, CSSObject } from 'styled-components';
 
+import Box, { Grid } from '../Box';
 import TextField from '../TextField';
 
 import { CreditCardFormContext } from './CreditCardFormController';
 
-const StyledForm = styled.div``;
-
-interface GridProps {
-  container?: boolean;
-  css?: CSSObject;
-  sm?: number;
-  item?: boolean;
-}
-
-const Grid = styled.div<GridProps>`
-  ${({ container }) => (container && css`
-    display: flex;
-  `)}
-
-  ${({ item }) => (item && css`
-    border-right: 10px solid transparent;
-
-    &[item]:last-of-type {
-      border-right: none;
-    }
-  `)}
-
-  flex: ${({ sm }) => sm};
-  
-  ${({ css }) => css};
+const StyledForm = styled.div`
+  flex: 1;
 `;
 
 const CreditCardForm = () => {
@@ -40,7 +18,7 @@ const CreditCardForm = () => {
 
   const { control, errors } = context;
 
-  function renderFieldCreditCard() {
+  function renderFieldNumber() {
     const mask = [/\d/, /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/];
     return (
       <Controller
@@ -83,9 +61,9 @@ const CreditCardForm = () => {
         as={
           <TextField
             label="Validade (mês/ano):"
-            mask={[/\d/, /\d/, '/', /\d/, /\d/]}
+            mask={[/\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
             error={errors.expiringDate && errors.expiringDate.message}
-            placeholder="__/__"
+            placeholder="__/____"
           />
         }
         name="expiringDate"
@@ -115,25 +93,23 @@ const CreditCardForm = () => {
 
   return (
     <StyledForm>
-      <Grid container>
-        <Grid item sm={2} css={{ marginBottom: '25px' }}>
-          {renderFieldCreditCard()}
-        </Grid>
-      </Grid>
+      <Grid template="1fr" gap="25px" css={{ marginBottom: '25px' }}>
+        <Box>
+          {renderFieldNumber()}
+        </Box>
 
-      <Grid container>
-        <Grid item sm={2} css={{ marginBottom: '25px' }}>
+        <Box>
           {renderFieldName()}
-        </Grid>
+        </Box>
       </Grid>
 
-      <Grid container>
-        <Grid item sm={3}>
+      <Grid template="1.2fr 1fr" css={{ marginBottom: '15px' }}>
+        <Box>
           {renderFieldExpiringDate()}
-        </Grid>
-        <Grid item sm={2}>
+        </Box>
+        <Box>
           {renderFieldCodeVerification()}
-        </Grid>
+        </Box>
       </Grid>
     </StyledForm>
   );

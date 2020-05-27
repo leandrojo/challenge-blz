@@ -1,8 +1,8 @@
 import Link, { LinkProps } from 'next/link'
 import styled from 'styled-components';
 
-const StyledSteps = styled.nav`
-  background-color: #FFF;
+export const StyledSteps = styled.nav`
+  background-color: white;
   border-radius: 0 0 3px 3px;
   box-shadow: 1px 1px 5px 0 rgba(0,0,29,0.22);
   height: 40px;
@@ -21,7 +21,7 @@ interface StyledStepProps {
   active?: boolean;
 }
 
-const StyledStep = styled.li<StyledStepProps>`
+export const StyledStep = styled.li<StyledStepProps>`
   align-items: center;
   display: flex;
   flex: 0;
@@ -31,7 +31,7 @@ const StyledStep = styled.li<StyledStepProps>`
   a {
     align-items: center;
     color: ${({ active, theme }) => {
-      return active ? theme.colors.primaryLight : theme.colors.grayLight;
+      return active ? theme.colors.primaryLight : theme.colors.gray;
     }};
     display: inline-flex;
     font-size: 13px;
@@ -62,13 +62,12 @@ interface StepsProps {
 }
 
 const Steps: React.FC<StepsProps> = ({ currentStep }) => {
-  console.log(currentStep);
   return (
     <StyledSteps>
       <ol>
-        <Step active href="/sacola">Sacola</Step>
-        <Step href="/pagamento">Pagamento</Step>
-        <Step href="/confirmacao">Confirmação</Step>
+        <Step active href="/">Sacola</Step>
+        <Step href="/payment">Pagamento</Step>
+        <Step href="/success">Confirmação</Step>
       </ol>
     </StyledSteps>
   );

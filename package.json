@@ -12,7 +12,7 @@
   "dependencies": {
     "@rematch/core": "^1.4.0",
     "@rematch/persist": "^1.1.6",
-    "moment": "^2.26.0",
+    "moment": "^2.29.4",
     "next": "9.4.2",
     "next-redux-wrapper": "^6.0.0",
     "react": "16.13.1",
